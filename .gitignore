@@ -1,0 +1,25 @@
+medai-venv
+__pycache__/
+
+# Package Files
+*.egg-info
+
+# Dataset files
+datasets
+
+# Training logs
+logs
+wandb
+db.sqlite3
+
+# Outputs
+notebooks/csv_outputs
+notebooks/all_figures
+notebooks/dataset_label_analysis
+notebooks/preds_targets
+notebooks/preds_targets_imbalanced_data
+notebooks/preds_targets_balanced_data
+notebooks/*.csv
+
+# Alignment params
+src/medai/utils/results

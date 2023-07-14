@@ -1,0 +1,27 @@
+SASN_vanilla:
+  model_path: "logs/SASN_vanilla/2023-03-14_16-53-56/version_0/checkpoints/epoch=299-step=51000.ckpt"
+  labels_pickle_path: "notebooks/preds_targets_imbalanced_data/labels/set1/exp2_spicedpie47_preds_vals.pickle"
+  heatmaps_pickle_path: "notebooks/preds_targets_imbalanced_data/heatmaps/aasn_spiced-pie-47_heatmaps.pickle"
+  bbox_pickle_path: "notebooks/preds_targets_imbalanced_data/bounding_boxes/aasn_spiced-pie-47_boxes.pickle"
+  exp_name: "SASN_vanilla (exp2- seed82-spiced-pie-47)"
+
+SASN_split:
+  model_path: "logs/SASN_split/2023-03-15_13-28-33/version_0/checkpoints/epoch=299-step=51000.ckpt"
+  labels_pickle_path: "notebooks/preds_targets_imbalanced_data/labels/set1/exp6_stoicyogurt48_preds_vals.pickle"
+  heatmaps_pickle_path: "notebooks/preds_targets_imbalanced_data/heatmaps/aasn2_stoic-yogurt-48_heatmaps.pickle"
+  bbox_pickle_path: "notebooks/preds_targets_imbalanced_data/bounding_boxes/aasn2_stoic-yogurt-48_boxes.pickle"
+  exp_name: "SASN_split (exp6 -stoic-yogurt-48)"
+
+CheXNet:
+  model_path: "logs/CheXNet/2023-03-16_00-55-50/version_0/checkpoints/epoch=299-step=3300.ckpt"
+  labels_pickle_path: "notebooks/preds_targets_imbalanced_data/labels/set1/baseline_etherealgorge49_preds_targets.pickle"
+  heatmaps_pickle_path: None
+  bbox_pickle_path: None
+  exp_name: "CheXNet (ethereal-gorge-49)"
+
+MaskRCNN:
+  model_path: "logs/MaskRCNN/2023-03-22_23-50-09/version_0/checkpoints/epoch=299-step=41100.ckpt"
+  labels_pickle_path: "notebooks/preds_targets_imbalanced_data/labels/set1/maskrcnn-genial-planet-58.pickle"
+  heatmaps_pickle_path: "notebooks/preds_targets_imbalanced_data/heatmaps/maskrcnn_genial-planet-58_masks.pickle"
+  bbox_pickle_path: "notebooks/preds_targets_imbalanced_data/bounding_boxes/maskrcnn_genial-planet-58_boxes.pickle"
+  exp_name: "Mask R-CNN (genial-planet-58)"

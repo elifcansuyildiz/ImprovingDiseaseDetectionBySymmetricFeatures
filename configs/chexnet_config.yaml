@@ -1,0 +1,61 @@
+_anchors:  
+  ChestXDet_train_img_dir: &CHESTXDET_TRAIN_IMG_DIR "ChestX-Det-Dataset/train/"
+  ChestXDet_test_img_dir: &CHESTXDET_TEST_IMG_DIR "ChestX-Det-Dataset/test/"
+  ChestXDet_json_train_file_path: &CHESTXDET_JSON_TRAIN_FILE_PATH "ChestX-Det-Dataset/ChestX_Det_train.json"
+  ChestXDet_json_test_file_path: &CHESTXDET_JSON_TEST_FILE_PATH "ChestX-Det-Dataset/ChestX_Det_test.json"
+  healthy_CXRs_train_img_dir: &HEALTHY_CXRS_TRAIN_IMG_DIR "healthy_CXRs/train/"
+  healthy_CXRs_test_img_dir: &HEALTHY_CXRS_TEST_IMG_DIR "healthy_CXRs/test/"
+  alignment_train_csv_path: &ALIGNMENT_TRAIN_CSV_PATH "train_val_alignment_params.csv"
+  alignment_test_csv_path: &ALIGNMENT_TEST_CSV_PATH "test_alignment_params.csv"
+
+dataset:
+  train:
+    data_dir: *CHESTXDET_TRAIN_IMG_DIR
+    json_file_path: *CHESTXDET_JSON_TRAIN_FILE_PATH
+    alignment_csv_path: *ALIGNMENT_TRAIN_CSV_PATH
+    transform: "ChexNetAugmentation"
+    img_resize: 224
+    binary_labeling: True
+    ignored_labels: ["Cardiomegaly", "Fracture"]
+    is_balanced_dataset: True
+    healthy_CXR_data_dir: *HEALTHY_CXRS_TRAIN_IMG_DIR
+    apply_alignment: False
+    in_memory: False
+    num_workers: 1
+  test:
+    data_dir: *CHESTXDET_TEST_IMG_DIR
+    json_file_path: *CHESTXDET_JSON_TEST_FILE_PATH
+    alignment_csv_path: *ALIGNMENT_TEST_CSV_PATH
+    transform: "ChexNetAugmentation"
+    img_resize: 224
+    binary_labeling: True
+    ignored_labels: ["Cardiomegaly", "Fracture"]
+    is_balanced_dataset: True
+    healthy_CXR_data_dir: *HEALTHY_CXRS_TEST_IMG_DIR
+    apply_alignment: False
+    in_memory: False
+    num_workers: 1
+
+dataloader:
+  batch_size: 2
+  num_workers: 16
+  train_val_split: [0.9, 0.1]
+
+#optimizer
+lr: 0.001
+scheduler: "ReduceLROnPlateau"
+
+#logging
+logging_save_dir: "logs"
+
+#trainer
+accelerator: "gpu"
+max_epoch: 2
+logging_interval: 4   # Default=50
+profiler: #"pytorch"  # Profiling helps you find bottlenecks in your code by capturing analytics such as how long a function takes or how much memory is used.
+checkpoints_dir: "CHECKPOINT/" # saves checkpoints to 'some/path/' at every epoch end
+accumulate_grad_batches: 16
+devices: [0]
+
+# trainer.fit
+ckpt_path: 
