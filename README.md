@@ -59,6 +59,7 @@ $ python scripts/main.py train-sasn-split-without-contrastive
 $ python scripts/main.py train-sasn-vanilla
 $ python scripts/main.py train-sasn-vanilla-without-contrastive
 
+# After training the model, don't forget to set ckpt_path variable in the respective config file. Models can be found in the logs folder. Alternatively, you can use train-test commands below.
 $ python scripts/main.py test-chexnet
 $ python scripts/main.py test-sasn-split
 $ python scripts/main.py test-sasn-split-without-contrastive
