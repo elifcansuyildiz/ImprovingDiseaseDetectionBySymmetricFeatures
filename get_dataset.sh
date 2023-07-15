@@ -1,11 +1,11 @@
 #!/bin/bash
 
+sudo apt-get install unzip
 mkdir datasets
 cd datasets
 mkdir ChestX-Det-Dataset
 cd ChestX-Det-Dataset
 wget http://resource.deepwise.com/ChestX-Det/train_data.zip
-sudo apt-get install unzip
 unzip train_data.zip -d .
 wget http://resource.deepwise.com/ChestX-Det/test_data.zip
 unzip test_data.zip -d .

@@ -1,14 +1,14 @@
 # Improving Disease Detection with Deep Learning by Examining the Symmetrical Features of the Lungs
 
-In this thesis, we analyze chest X-rays by exploiting symmetry features to classify a patient as diseased or healthy. We implement a symmetry-aware deep learning model which utilizes Siamese Network with DenseNet as a feature extractor. Additionally, the model includes a symmetry-aware contrastive learning approach to process the symmetry differences in features. We investigate two different approaches for processing chest X-rays in the deep learning pipeline. The former is processing the entire X-ray scan while the latter is separating the left and right lungs to obtain the prime features of each lung independently. Furthermore, to support the model to exploit symmetry features effectively, we develop an alignment module to make the lung fields symmetric in the vertical line. To evaluate the proposed model, we compare the classification performance of our model with baseline models, DenseNet and Mask R-CNN.
+In this thesis, we analyze chest X-rays by exploiting symmetry features to classify a patient as diseased or healthy. We implement a symmetry-aware deep learning model which utilizes Siamese Network with DenseNet as a feature extractor. Additionally, the model includes a symmetry-aware contrastive learning approach to process the symmetry differences in features. We investigate two different approaches for processing chest X-rays in the deep learning pipeline. The former is processing the entire X-ray scan while the latter is separating the left and right lungs to obtain the prime features of each lung independently. Furthermore, to support the model to exploit symmetry features effectively, we develop an alignment module to make the lung fields symmetric in the vertical line. To evaluate the proposed model, we compare the classification performance of our model with baseline models, CheXNet and Mask R-CNN.
 
 ### Visual Outputs
 
-In the following figure, ground truth labels with the original images, probability maps of our proposed symmetry-aware models, heat maps of the CheXNet baseline model and bounding boxes of the Mask R-CNN baseline model are presented, respectively.
+In the following figure, ground truth labels with the original images, probability maps of our proposed symmetry-aware models ($\text{SASN}_{\text{vanilla}}$ and$\text{SASN}_{\text{split}}$), heat maps of the CheXNet baseline model and bounding boxes predictions of the Mask R-CNN baseline model are presented, respectively.
 
 <img src="outputs/probability_maps.png" alt="probability_maps" style="zoom:50%;" />
 
-In the following figure, ground truth labels and distance maps of our proposed symmetry-aware models are presented, respectively.
+In the following figure, ground truth labels and distance maps of our proposed symmetry-aware models, $\text{SASN}_{\text{vanilla}}$ and $\text{SASN}_{\text{split}}$, are presented, respectively.
 
 <img src="outputs/distance_maps.png" alt="distance_maps" style="zoom:50%;" />
 
@@ -24,21 +24,22 @@ In the following figure, the original image and its aligned form by our proposed
    $ ./create_virtual_env.sh
    ```
 
-2.  Download the dataset either manually or by running a script.
+2.  Download the dataset either manually or automatically: 
 
-   [This repository](https://github.com/Deepwise-AILab/ChestX-Det-Dataset) shares the ChestX-Det-Dataset. You can manually download train data from [here](http://resource.deepwise.com/ChestX-Det/train_data.zip), test data from [here](http://resource.deepwise.com/ChestX-Det/test_data.zip), train.json file from [here](https://github.com/Deepwise-AILab/ChestX-Det-Dataset/blob/main/ChestX_Det_train.json) and test.json file from [here](https://github.com/Deepwise-AILab/ChestX-Det-Dataset/blob/main/ChestX_Det_test.json).
+   - **Manually**: [This repository](https://github.com/Deepwise-AILab/ChestX-Det-Dataset) shares the ChestX-Det-Dataset. You can manually download train data from [here](http://resource.deepwise.com/ChestX-Det/train_data.zip), test data from [here](http://resource.deepwise.com/ChestX-Det/test_data.zip), train.json file from [here](https://github.com/Deepwise-AILab/ChestX-Det-Dataset/blob/main/ChestX_Det_train.json) and test.json file from [here](https://github.com/Deepwise-AILab/ChestX-Det-Dataset/blob/main/ChestX_Det_test.json).
 
-   You can run the following commands to get the training and test data:
+   - **Automatically**: By running our script with the following command:
 
-      ```bash
-      $ ./get_dataset.sh
-      ```
+     ```bash
+     $ ./get_dataset.sh
+     ```
 
 ## Training and Testing the Models
 
 You can see the list of commands with:
 
 ```bash
+$ source medai-venv/bin/activate
 $ python3 scripts/main.py --help
 ```
 
@@ -70,12 +71,12 @@ Note: This script logs the scores in Tensorboard and Weights&Biases.
 
 ## Notebooks
 
-| Notebook               | Description                                                  |
-| ---------------------- | ------------------------------------------------------------ |
-| [ChestX-Det-Dataset]() | Inspects the chest X-rays of the subset of the NIH dataset. This subset includes more bounding box and polygon labels of diseases (~3000 images comprising bounding box and polygons) |
-| [ChestAlignment]()     | Presents the results of chest alignment module.              |
-| [Evaluation]()         | Provides the quantitative results of the proposed model for various metrics such as AUROC, average precision (AP), F1 score, precision, recall, specificity, ROC curve, Precision-Recall curve. |
-| [Heatmaps]()           | Provides probability map and heat map outputs of the proposed models. |
+| Notebook                                               | Description                                                  |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| [ChestX-Det-Dataset](notebooks/ChestXDetDataset.ipynb) | Inspects the chest X-rays of the subset of the NIH dataset. This subset includes more bounding box and polygon labels of diseases (~3000 images comprising bounding box and polygons) |
+| [ChestAlignment](notebooks/ChestAlignment.ipynb)       | Presents the results of the proposed chest alignment module. |
+| [Evaluation](notebooks/Evaluation.ipynb)               | Provides the quantitative results of the proposed models and baseline models for various metrics such as AUROC, average precision (AP), F1 score, precision, recall, specificity, ROC curve, Precision-Recall curve. |
+| [Heatmaps](notebooks/Heatmaps.ipynb)                   | Provides probability map and heat map outputs of the proposed models. |
 
 ## Layout
 
