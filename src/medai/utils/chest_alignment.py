@@ -360,7 +360,7 @@ if __name__ == "__main__":
     idx_end = np.min([idx_start+image_per_worker, num_files])
 
     if process_train_set:
-        output_file_name = "results/alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"
+        output_file_name = "results/train_alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"
         file_paths = sasn_data_module.train_val_dataset.image_file_paths[idx_start:idx_end]
     else:
         output_file_name = "results/test_set_alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"

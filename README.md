@@ -74,6 +74,15 @@ $ python scripts/main.py train-test-sasn-vanilla-without-contrastive
 
 Note: This script logs the scores in Tensorboard and Weights&Biases.
 
+## Alignment Module
+
+To compute the alignment parameters, run the following script:
+
+```bash
+$ cd src/medai/utils
+$ ./align_all_images.sh
+```
+
 ## Notebooks
 
 | Notebook                                               | Description                                                  |

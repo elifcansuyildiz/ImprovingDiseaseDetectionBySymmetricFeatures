@@ -18,12 +18,14 @@
 NUM_WORKERS=1
 #export CUDA_VISIBLE_DEVICES=0,2
 
+mkdir results
+
 for (( i=0; i<$NUM_WORKERS; i++ ))
 do
    echo $i
-   #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" &
-   python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --process_train_set &
-   #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --distribute_to_devices &
+   #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" & # PROCESS TEST SET
+   python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --process_train_set &  # PROCESS TRAIN SET
+   #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --distribute_to_devices & # PROCESS TEST SET AND DISTRIBUTE COMPUTATION
    pids[${i}]=$!
    sleep 1
 done
