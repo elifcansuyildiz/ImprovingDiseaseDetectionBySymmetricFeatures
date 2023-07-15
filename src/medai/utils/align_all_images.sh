@@ -15,14 +15,15 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, see <http://www.gnu.org/licenses/>.
 
-NUM_WORKERS=3
-export CUDA_VISIBLE_DEVICES=0,2
+NUM_WORKERS=1
+#export CUDA_VISIBLE_DEVICES=0,2
 
 for (( i=0; i<$NUM_WORKERS; i++ ))
 do
    echo $i
    #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" &
-   python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --distribute_to_devices &
+   python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --process_train_set True &
+   #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --distribute_to_devices &
    pids[${i}]=$!
    sleep 1
 done

@@ -331,38 +331,40 @@ if __name__ == "__main__":
     params["dataset"]["train"]["transform"] = None
 
     sasn_data_module = ChestDataModule(dataset_class=ChestXDetDataset, **params["dataloader"])
-    #sasn_data_module.setup("fit", **params["dataset"]["train"])
-    sasn_data_module.setup("test", **params["dataset"]["test"])
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--curr_worker", "-i", required=True)
     parser.add_argument("--num_workers", "-n", required=True)
     parser.add_argument('--distribute_to_devices', default=False, action="store_true")
+    parser.add_argument("--process_train_set", default=False, action="store_true")
     args = parser.parse_args()  #"--index 1".split()
     curr_worker = int(args.curr_worker)
     num_workers = int(args.num_workers)
     distribute_to_devices = bool(args.distribute_to_devices)
+    process_train_set = bool(args.process_train_set)
     
     if distribute_to_devices:
         cuda_device_idx = curr_worker % torch.cuda.device_count()
         torch.cuda.set_device(cuda_device_idx)
         print("Worker-" + str(curr_worker) + " is using cuda device " + str(cuda_device_idx))
     
-    #file_paths = sasn_data_module.train_val_dataset.image_file_paths[i*100:(i+1)*100]
-    #file_paths = sasn_data_module.test_dataset.image_file_paths[i*100:(i+1)*100]
-    
-    #num_files = len(sasn_data_module.train_val_dataset.image_file_paths)
-    num_files = len(sasn_data_module.test_dataset.image_file_paths)
+    if process_train_set:
+        sasn_data_module.setup("fit", **params["dataset"]["train"])
+        num_files = len(sasn_data_module.train_val_dataset.image_file_paths)
+    else:
+        sasn_data_module.setup("test", **params["dataset"]["test"])
+        num_files = len(sasn_data_module.test_dataset.image_file_paths)
 
     image_per_worker = int(np.ceil(num_files / num_workers))
     idx_start = curr_worker*image_per_worker
     idx_end = np.min([idx_start+image_per_worker, num_files])
 
-    #output_file_name = "results/alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"
-    output_file_name = "results/test_set_alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"
-
-    #file_paths = sasn_data_module.train_val_dataset.image_file_paths[idx_start:idx_end]
-    file_paths = sasn_data_module.test_dataset.image_file_paths[idx_start:idx_end]
+    if process_train_set:
+        output_file_name = "results/alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"
+        file_paths = sasn_data_module.train_val_dataset.image_file_paths[idx_start:idx_end]
+    else:
+        output_file_name = "results/test_set_alignment_result_" + str(curr_worker) + "_" + str(idx_start) + "_" + str(idx_end) + ".pickle"
+        file_paths = sasn_data_module.test_dataset.image_file_paths[idx_start:idx_end]
     
     print("worker:", curr_worker, "start:", idx_start, "end:", idx_end)
     
