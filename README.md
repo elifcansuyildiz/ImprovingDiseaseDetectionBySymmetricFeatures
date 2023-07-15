@@ -4,11 +4,11 @@ In this thesis, we analyze chest X-rays by exploiting symmetry features to class
 
 ### Visual Outputs
 
-In the following figure, ground truth labels with the original images, probability maps of our proposed symmetry-aware models ($\text{SASN}_{\text{vanilla}}$ and$\text{SASN}_{\text{split}}$), heat maps of the CheXNet baseline model and bounding boxes predictions of the Mask R-CNN baseline model are presented, respectively.
+In the following figure, chest X-ray images with ground truth labels, probability maps of our proposed symmetry-aware models (SASN_vanilla and SASN_split), heat maps of the CheXNet baseline model and bounding boxes predictions of the Mask R-CNN baseline model are presented, respectively.
 
 <img src="outputs/probability_maps.png" alt="probability_maps" style="zoom:50%;" />
 
-In the following figure, ground truth labels and distance maps of our proposed symmetry-aware models, $\text{SASN}_{\text{vanilla}}$ and $\text{SASN}_{\text{split}}$, are presented, respectively.
+In the following figure, chest X-ray images with ground truth labels and distance maps of our proposed symmetry-aware models, SASN_vanilla and SASN_split, are presented, respectively.
 
 <img src="outputs/distance_maps.png" alt="distance_maps" style="zoom:50%;" />
 
@@ -36,10 +36,15 @@ In the following figure, the original image and its aligned form by our proposed
 
 ## Training and Testing the Models
 
-You can see the list of commands with:
+Activate the virtual environment:
 
 ```bash
 $ source medai-venv/bin/activate
+```
+
+You can see the list of commands with:
+
+```bash
 $ python3 scripts/main.py --help
 ```
 
