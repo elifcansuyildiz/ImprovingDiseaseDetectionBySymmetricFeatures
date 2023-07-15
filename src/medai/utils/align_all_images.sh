@@ -22,7 +22,7 @@ for (( i=0; i<$NUM_WORKERS; i++ ))
 do
    echo $i
    #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" &
-   python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --process_train_set True &
+   python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --process_train_set &
    #python chest_alignment.py -i "$i" -n "$NUM_WORKERS" --distribute_to_devices &
    pids[${i}]=$!
    sleep 1
